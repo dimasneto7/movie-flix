@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
+import './movie-info.css'
 
 import api from '../../services/api'
 
 export default function Movie() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [movie, setMovie] = useState({})
   const [loading, setLoading] = useState(true)
 
@@ -24,6 +26,8 @@ export default function Movie() {
         })
         .catch(() => {
           console.log('Filme não encontrado')
+          navigate('/', { replace: true })
+          return
         })
     }
 
@@ -32,7 +36,26 @@ export default function Movie() {
     return () => {
       console.log('componente foi desmontado')
     }
-  }, [id])
+  }, [id, navigate])
+
+  function saveMovie() {
+    const minhaLista = localStorage.getItem('@movieFlix')
+
+    let filmesSalvos = JSON.parse(minhaLista) || []
+
+    const hasFilme = filmesSalvos.some(
+      (filmesSalvo) => filmesSalvo.id === movie.id
+    )
+
+    if (hasFilme) {
+      alert('Esse filme já está na lista')
+      return
+    }
+
+    filmesSalvos.push(movie)
+    localStorage.setItem('@movieFlix', JSON.stringify(filmesSalvos))
+    alert('Filme salvo com sucesso')
+  }
 
   if (loading) {
     return (
@@ -52,6 +75,19 @@ export default function Movie() {
       <span>{movie.overview}</span>
 
       <strong>Avaliação: {movie.vote_average} / 10</strong>
+
+      <div className="area-buttons">
+        <button onClick={saveMovie}>Salvar</button>
+        <button>
+          <a
+            target="_blank"
+            rel="external noreferrer"
+            href={`https://youtube.com/results?search_query=${movie.title} Trailer`}
+          >
+            Trailer
+          </a>
+        </button>
+      </div>
     </div>
   )
 }
