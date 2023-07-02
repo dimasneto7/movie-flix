@@ -1,0 +1,46 @@
+.myMovies {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.myMovies h1 {
+  margin-bottom: 14px;
+}
+
+.myMovies span {
+  font-size: 18px;
+}
+
+.myMovies ul {
+  width: 720px;
+}
+
+.myMovies ul li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.myMovies div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myMovies div a {
+  text-decoration: none;
+  color: #000;
+  margin-right: 14px;
+  border: 1px solid #000;
+  padding: 8px 12px;
+  transition: all 0.2s;
+}
+
+.myMovies div a:hover {
+  color: #fff;
+  background-color: #000;
+}

@@ -4,6 +4,8 @@ import './movie-info.css'
 
 import api from '../../services/api'
 
+import { toast } from 'react-toastify'
+
 export default function Movie() {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -48,13 +50,13 @@ export default function Movie() {
     )
 
     if (hasFilme) {
-      alert('Esse filme já está na lista')
+      toast.warn('Esse filme já está na lista')
       return
     }
 
     filmesSalvos.push(movie)
     localStorage.setItem('@movieFlix', JSON.stringify(filmesSalvos))
-    alert('Filme salvo com sucesso')
+    toast.success('Filme salvo com sucesso')
   }
 
   if (loading) {
