@@ -19,6 +19,15 @@
   object-fit: cover;
 }
 
+.movieInfoImg {
+  border-radius: 8px;
+  width: 800px;
+  height: 400px;
+  background-size: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 .movie-info h3 {
   margin-top: 14px;
 }
